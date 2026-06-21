@@ -1,0 +1,101 @@
+# -----------------------------
+# USER MANAGEMENT
+# -----------------------------
+
+useradd sai
+useradd venkatesh
+useradd narayana
+useradd kasim
+useradd paparao
+useradd mani
+useradd srinu
+
+passwd sai
+passwd venkatesh
+passwd narayana
+passwd kasim
+passwd paparao
+passwd mani
+passwd srinu
+
+# View Users
+cat /etc/passwd
+
+# Check User ID
+id sai
+
+# -----------------------------
+# SSH CONFIGURATION
+# -----------------------------
+
+nano /etc/ssh/sshd_config
+
+systemctl restart sshd
+
+systemctl status sshd
+
+# -----------------------------
+# DOCKER INSTALLATION
+# -----------------------------
+
+yum install docker -y
+
+systemctl start docker
+
+systemctl enable docker
+
+systemctl status docker
+
+# -----------------------------
+# DOCKER GROUP MANAGEMENT
+# -----------------------------
+
+gpasswd -a sai docker
+
+gpasswd -a venkatesh docker
+
+gpasswd -a narayana docker
+
+gpasswd -a kasim docker
+
+gpasswd -a paparao docker
+
+gpasswd -a mani docker
+
+gpasswd -a srinu docker
+
+# Verify Group Membership
+
+groups sai
+
+groups venkatesh
+
+groups narayana
+
+groups kasim
+
+groups paparao
+
+groups mani
+
+groups srinu
+
+# -----------------------------
+# SYSTEM VERIFICATION
+# -----------------------------
+
+hostname
+
+hostname -I
+
+whoami
+
+pwd
+
+date
+
+uptime
+
+df -h
+
+free -m
