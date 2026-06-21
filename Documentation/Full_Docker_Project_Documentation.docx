@@ -1,0 +1,345 @@
+PROJECT TITLE
+
+Multi-User Docker-Based Web Application Deployment with Persistent Storage Management
+
+ABSTRACT
+
+This project demonstrates Linux user administration and Docker container management in a multi-user environment. Multiple Linux users were created and assigned different Docker-related responsibilities. A custom Docker image was built using Dockerfile and deployed as a web application. Docker volumes were implemented to provide persistent storage and verify data availability even after container deletion.
+
+OBJECTIVE
+
+• Create Linux users and assign responsibilities.
+• Install and configure Docker Engine.
+• Create a custom Docker image.
+• Deploy a web application using Docker containers.
+• Create and manage Docker volumes.
+• Verify persistent storage using Docker volumes.
+
+TECHNOLOGIES USED
+
+• Linux
+• Docker
+• Dockerfile
+• HTML
+• SSH
+• Docker Volumes
+
+---
+
+STEP-1 : LINUX USER CREATION
+
+Commands:
+
+useradd sai
+useradd venkatesh
+useradd narayana
+useradd kasim
+useradd paparao
+useradd mani
+useradd srinu
+
+passwd sai
+passwd venkatesh
+passwd narayana
+passwd kasim
+passwd paparao
+passwd mani
+passwd srinu
+
+Description:
+
+Multiple Linux users were created and assigned individual Docker-related responsibilities.
+
+Output:
+
+All users created successfully.
+
+---
+
+STEP-2 : SSH CONFIGURATION
+
+Commands:
+
+nano /etc/ssh/sshd_config
+
+systemctl restart sshd
+
+systemctl status sshd
+
+Description:
+
+SSH service was configured to allow secure remote login access.
+
+Output:
+
+SSH service running successfully.
+
+---
+
+STEP-3 : DOCKER INSTALLATION
+
+Commands:
+
+yum install docker -y
+
+systemctl start docker
+
+systemctl enable docker
+
+systemctl status docker
+
+Description:
+
+Docker Engine was installed and configured successfully on the Linux server.
+
+Output:
+
+Docker installed and running successfully.
+
+---
+
+STEP-4 : DOCKER PERMISSION ASSIGNMENT
+
+Commands:
+
+gpasswd -a sai docker
+gpasswd -a venkatesh docker
+gpasswd -a narayana docker
+gpasswd -a kasim docker
+gpasswd -a paparao docker
+gpasswd -a mani docker
+gpasswd -a srinu docker  
+
+Description:
+
+Docker permissions were assigned by adding all users to the Docker group.
+
+Output:
+
+All users added to Docker group successfully.
+
+---
+
+TASK-1 : DOCKER IMAGE MANAGEMENT
+
+Assigned User : Sai
+
+Commands:
+
+nano index.html
+
+Content: 
+
+nano Dockerfile
+
+Content:
+
+FROM nginx
+
+COPY index.html /usr/share/nginx/html/index.html
+
+docker build -t suresh .
+
+docker images
+
+Description:
+
+A custom web page and Dockerfile were created. Using the Docker build command, a custom image named "suresh" was generated for application deployment.
+
+Output:
+
+Custom Docker image created successfully.
+
+Image Name : suresh
+
+---
+
+TASK-2 : CONTAINER CREATION
+
+Assigned User : Venkatesh
+
+Commands:
+
+docker run -itd --name vks -p 8080:80 suresh  bash
+
+docker ps
+
+docker ps -a
+
+Description:
+
+A Docker container named vks was created using the custom image suresh and deployed successfully.
+
+Output:
+
+Container Name : vks
+
+Status : Running
+
+---
+
+TASK-3 : CONTAINER MONITORING
+
+Assigned User : Narayana
+
+Commands:
+
+docker ps
+
+docker inspect vks
+
+docker logs vks
+
+docker stats
+
+Description:
+
+The running container was monitored using Docker commands. Container status and logs were verified successfully.
+
+Output:
+
+Container monitored successfully.
+
+---
+
+TASK-4 : CONTAINER OPERATIONS
+
+Assigned User : Kasim
+
+Commands:
+
+docker stop vks
+
+docker start vks
+
+docker restart vks
+
+Description:
+
+Container lifecycle operations such as stop, start, and restart were performed successfully.
+
+Output:
+
+Container operations completed successfully.
+
+---
+
+TASK-5 : DOCKER VOLUME CREATION
+
+Assigned User : Paparao
+
+Commands:
+
+docker volume create abcbank
+
+docker volume ls
+
+docker volume inspect abcbank
+
+Description:
+
+A Docker volume named abcbank was created for persistent storage. The volume details and storage location were verified.
+
+Output:
+
+Volume Name : abcbank
+
+Storage Location:
+
+/var/lib/docker/volumes/abcbank/_data
+
+Volume created successfully.
+
+---
+
+TASK-6 : VOLUME MAPPING
+
+Assigned User : Mani
+
+Commands:
+
+docker run -itd --name vks2 -v abcbank:/project1 -p 8081:80 suresh bash
+
+docker exec -it vks2 bash
+
+docker inspect vks2
+
+Description:
+
+The Docker volume abcbank was attached to container vks2 through the mount path /project1. This enabled persistent data storage inside the container.
+
+Output:
+
+Container Name : vks2
+
+Volume Mapping Successful
+
+---
+
+TASK-7 : DATA PERSISTENCE VERIFICATION 
+
+Assigned User : Srinu
+
+Commands:
+
+docker exec -it vks2 bash
+
+cd /project1
+
+nano customer.html
+
+Content:
+
+ABC Bank Customer Portal
+
+cat customer.html
+
+docker rm -f vks2
+
+docker run -it d --name vks3 -v abcbank:/project1 -p 8082:80 suresh bash 
+
+docker exec -it vks3 bash  
+
+cat /project1/customer.html   
+
+Description: 
+
+A file named customer.html was created inside the mounted directory. After deleting container vks2, a new container named vks3 was created using the same Docker volume. The stored file was successfully retrieved, confirming persistent storage.
+
+Output:
+
+ABC Bank Customer Portal
+
+Persistent Storage Verified Successfully
+
+---
+
+FINAL PROJECT RESULT
+
+✓ Linux Users Created Successfully
+
+✓ SSH Configured Successfully
+
+✓ Docker Installed Successfully
+
+✓ Docker Permissions Assigned Successfully
+
+✓ Custom Docker Image Created Successfully
+
+✓ Docker Container Created Successfully
+
+✓ Container Monitoring Completed Successfully
+
+✓ Container Operations Performed Successfully
+
+✓ Docker Volume Created Successfully
+
+✓ Docker Volume Mapped Successfully
+
+✓ Persistent Storage Verified Successfully
+
+PROJECT STATUS : SUCCESSFULLY COMPLETED
+
+CONCLUSION
+
+This project successfully demonstrated Linux Administration and Docker Container Management in a multi-user environment. Different users were assigned responsibilities such as image creation, container deployment, monitoring, operations, volume creation, volume mapping, and persistence verification. Docker volume abcbank ensured that application data remained available even after container deletion, demonstrating the concept of persistent storage in Docker....
