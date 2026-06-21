@@ -1,0 +1,47 @@
+# Create Users
+useradd sai
+useradd venkatesh
+useradd narayana
+useradd kasim
+useradd paparao
+useradd mani
+useradd srinu
+
+# Set Passwords
+passwd sai
+passwd venkatesh
+passwd narayana
+passwd kasim
+passwd paparao
+passwd mani
+passwd srinu
+
+# Configure SSH
+nano /etc/ssh/sshd_config
+
+# Restart SSH Service
+systemctl restart sshd
+
+# Check SSH Status
+systemctl status sshd
+
+# Install Docker
+yum install docker -y
+
+# Start Docker
+systemctl start docker
+
+# Enable Docker
+systemctl enable docker
+
+# Check Docker Status
+systemctl status docker
+
+# Add Users to Docker Group
+gpasswd -a sai docker
+gpasswd -a venkatesh docker
+gpasswd -a narayana docker
+gpasswd -a kasim docker
+gpasswd -a paparao docker
+gpasswd -a mani docker
+gpasswd -a srinu docker
